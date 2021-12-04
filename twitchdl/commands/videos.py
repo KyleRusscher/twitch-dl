@@ -39,31 +39,12 @@ def videos(args):
     print_out("<dim>Loading videos...</dim>")
     generator = twitch.channel_videos_generator(
         args.channel_name, args.limit, args.sort, args.type, game_ids=game_ids)
-
+    
     first = 1
 
     for videos, has_more in generator:
         count = len(videos["edges"]) if "edges" in videos else 0
         total = videos["totalCount"]
         last = first + count - 1
-
-        print_out("-" * 80)
-        print_out("<yellow>Showing videos {}-{} of {}</yellow>".format(first, last, total))
-
-        for video in videos["edges"]:
-            print_out()
-            print_video(video["node"])
-
-        if not args.pager and has_more:
-            print_out(
-                "\n<dim>There are more videos. "
-                "Increase the --limit or use --pager to see the rest.</dim>"
-            )
-            break
-
-        if not has_more or not _continue():
-            break
-
-        first += count
-    else:
-        print_out("<yellow>No videos found</yellow>")
+        return [video["node"] for video in videos["edges"]]
+        
