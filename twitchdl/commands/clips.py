@@ -106,21 +106,7 @@ def _clips_list(args):
 
         print_out("-" * 80)
         print_out("<yellow>Showing clips {}-{} of ??</yellow>".format(first, last))
-
+        clips = []
         for clip in clips["edges"]:
-            print_out()
-            print_clip(clip["node"])
-
-        if not args.pager:
-            print_out(
-                "\n<dim>There are more clips. "
-                "Increase the --limit or use --pager to see the rest.</dim>"
-            )
-            break
-
-        if not has_more or not _continue():
-            break
-
-        first += count
-    else:
-        print_out("<yellow>No clips found</yellow>")
+            clips.append(clip["node"])
+        return clips
