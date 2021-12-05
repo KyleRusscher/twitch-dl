@@ -216,6 +216,7 @@ def _download_clip(slug, args):
     download_file(url, target)
 
     print_out("Downloaded: {}".format(target))
+    return target
 
 
 def _download_video(video_id, args):
@@ -287,3 +288,4 @@ def _download_video(video_id, args):
         shutil.rmtree(target_dir)
 
     print_out("\nDownloaded: <green>{}</green>".format(target))
+    return target
