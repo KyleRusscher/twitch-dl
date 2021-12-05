@@ -52,7 +52,7 @@ def _get_game_ids(names):
 def _clips_json(args):
     clips = twitch.get_channel_clips(args.channel_name, args.period, args.limit)
     nodes = list(edge["node"] for edge in clips["edges"])
-    print_json(nodes)
+    return nodes
 
 
 def _clip_target_filename(clip):
